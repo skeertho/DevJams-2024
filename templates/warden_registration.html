@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Warden Registration</title>
+</head>
+<body>
+    <h2>Warden Registration</h2>
+
+    <!-- Display any messages (success or error) -->
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <form action="{% url 'dowarden_registration' %}" method="POST">
+        {% csrf_token %}
+
+
+        <label for="hostel">Hostel:</label><br>
+        <select id="hostel" name="hostel" required>
+            <option value="M">Mens</option>
+            <option value="F">Ladies</option>
+        </select><br><br>
+
+        <label for="block">Block:</label><br>
+        <input type="text" id="block" name="block" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
