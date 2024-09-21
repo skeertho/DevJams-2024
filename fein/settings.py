@@ -104,6 +104,18 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'quackpack.CustomUser'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    
+]
+PASSWORD_HASHERS = [
+    'django.contrib.auth.hashers.PBKDF2PasswordHasher',  # Default hasher
+]
+
+SECRET_KEY = 'ijnokm'
+
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/

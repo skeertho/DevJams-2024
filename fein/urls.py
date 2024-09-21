@@ -14,5 +14,8 @@ urlpatterns = [
     path('registration/warden/', views.wardenregistration, name='warden_registration'),
     path('doRegistration/student/', views.dostudentregistration, name='dostudent_registration'),
     path('doRegistration/warden/', views.dowardenregistration, name='dowarden_registration'),
-    
+    path('doLogin/main1', views.main1, name='student_main'),
+    path('doLogin/main2', views.main2, name='warden_main'),
+    path('doLogin/main1/request_page', views.request_page, name='request_page'),
+    path('doLogin/main1/deliver_page', views.deliver_page, name='deliver_page'),
 ]

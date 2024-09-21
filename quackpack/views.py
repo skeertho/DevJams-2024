@@ -23,22 +23,34 @@ def doLogin(request):
             messages.error(request, "Please provide all the details!!")
             return render(request, 'login_page.html')
 
-        user = authenticate(request, username=email, password=password)
+        try:
+            user = CustomUser.objects.get(email=email)
+            if user.check_password(password):
+                # Password is correct, proceed with login or other logic
+                print("login")
+            else:
+                # Password is incorrect
+                print("no")
+        except CustomUser.DoesNotExist:
+            #user does not exist
+            pass
 
+        
         if user is not None:
             # Password is correct, log the user in and redirect to the home page
             login(request, user)
             if user.user_type == CustomUser.STUDENT:
                 print("Student user logged in")
-                return redirect('main')
+                return redirect('student_main')
             elif user.user_type == CustomUser.WARDEN:
                 print("Warden user logged in")
-                return redirect('main2')
+                return redirect('warden_main')
             else:
                 print("Unknown user type")
                 return redirect('home')
             
         else:
+            print('test')
             messages.error(request, 'Invalid Login Credentials!!')
             return render(request, 'login_page.html')
 
@@ -138,7 +150,7 @@ def dowardenregistration(request):
         user.save()
 
         # Create the Warden instance
-        wardens.objects.create(email=user, block=block)
+        wardens.objects.create(email=user, block=block, hostel=hostel)
 
         messages.success(request, 'Warden account created successfully. You can now log in.')
         return render(request, 'login_page.html')
@@ -152,3 +164,15 @@ def get_user_type_from_email(email):
         return CustomUser.WARDEN
     else:
         return None
+    
+def main1(request):
+    return render(request,'main1.html')
+
+def main2(request):
+    return render(request,'main2.html')
+
+def request_page(request):
+    return render(request,'request_page.html')
+
+def deliver_page(request):
+    return render(request,'deliver_page.html')

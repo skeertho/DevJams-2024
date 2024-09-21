@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Delivery Request</title>
+</head>
+<body>
+
+    <h1>Order Delivery Request Form</h1>
+    
+    <form action="/submit-order" method="post">
+        
+        <!-- Registration Number -->
+        <label for="regNumber">Registration Number:</label><br>
+        <input type="text" id="regNumber" name="regNumber" required><br><br>
+
+        <!-- Pickup Location -->
+        <label for="pickupLocation">Pickup Location:</label><br>
+        <input type="text" id="pickupLocation" name="pickupLocation" required><br><br>
+
+        <!-- Delivery Location -->
+        <label for="deliveryLocation">Delivery Location:</label><br>
+        <input type="text" id="deliveryLocation" name="deliveryLocation" required><br><br>
+
+        <!-- Date -->
+        <label for="date">Date:</label><br>
+        <input type="date" id="date" name="date" required><br><br>
+
+        <!-- Time -->
+        <label for="time">Time:</label><br>
+        <input type="time" id="time" name="time" required><br><br>
+        <!-- OTP -->
+        <label for="otp">OTP:</label><br>
+        <input type="text" id="otp" name="otp" required><br><br>
+
+        <!-- Submit Button -->
+        <input type="submit" value="Submit Order">
+
+    </form>
+
+</body>
+</html>
