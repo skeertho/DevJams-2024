@@ -1,43 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Order Delivery Request</title>
+    <title>Request A Delivery | QuackPack</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- External CSS -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+	    margin: 3rem;
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 2rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            color: #333;
+        }
+
+        input[type="submit"] {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #2980b9;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+        }
+    </style>
 </head>
-<body>
 
-    <h1>Order Delivery Request Form</h1>
-    
-    <form action="/submit-order" method="post">
-        
-        <!-- Registration Number -->
-        <label for="regNumber">Registration Number:</label><br>
-        <input type="text" id="regNumber" name="regNumber" required><br><br>
+<body style="background-color:lightyellow;">
 
-        <!-- Pickup Location -->
-        <label for="pickupLocation">Pickup Location:</label><br>
-        <input type="text" id="pickupLocation" name="pickupLocation" required><br><br>
+    <div class="form-container", style="background-color:lemonchiffon;">
+        <h1>Order Delivery Request Form</h1>
 
-        <!-- Delivery Location -->
-        <label for="deliveryLocation">Delivery Location:</label><br>
-        <input type="text" id="deliveryLocation" name="deliveryLocation" required><br><br>
+        <form action="/submit-order" method="post">
+            <div>
+                <label for="regNumber">Registration Number:</label>
+                <input type="text" id="regNumber" name="regNumber" required>
+            </div>
 
-        <!-- Date -->
-        <label for="date">Date:</label><br>
-        <input type="date" id="date" name="date" required><br><br>
+            <div>
+                <label for="pickupLocation">Pickup Location:</label>
+                <input type="text" id="pickupLocation" name="pickupLocation" required>
+            </div>
 
-        <!-- Time -->
-        <label for="time">Time:</label><br>
-        <input type="time" id="time" name="time" required><br><br>
-        <!-- OTP -->
-        <label for="otp">OTP:</label><br>
-        <input type="text" id="otp" name="otp" required><br><br>
+            <div>
+                <label for="deliveryLocation">Delivery Location:</label>
+                <input type="text" id="deliveryLocation" name="deliveryLocation" required>
+            </div>
 
-        <!-- Submit Button -->
-        <input type="submit" value="Submit Order">
+            <div>
+                <label for="date">Date:</label>
+                <input type="date" id="date" name="date" required>
+            </div>
 
-    </form>
+            <div>
+                <label for="time">Time:</label>
+                <input type="time" id="time" name="time" required>
+            </div>
+
+            <div>
+                <label for="otp">OTP:</label>
+                <input type="text" id="otp" name="otp" required>
+            </div>
+
+            <div>
+                <input type="submit" value="Submit Order">
+            </div>
+        </form>
+    </div>
 
 </body>
+
 </html>

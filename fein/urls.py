@@ -18,4 +18,6 @@ urlpatterns = [
     path('doLogin/main2', views.main2, name='warden_main'),
     path('doLogin/main1/request_page', views.request_page, name='request_page'),
     path('doLogin/main1/deliver_page', views.deliver_page, name='deliver_page'),
+    path('submit-order', views.create_request, name='create_request'),
+    path('doLogin/main1/deliver_page/deliver', views.deliver, name='deliver'),
 ]

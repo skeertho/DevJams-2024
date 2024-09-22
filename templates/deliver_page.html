@@ -1,18 +1,56 @@
+<!-- deliver.html -->
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deliver</title>
+</head>
 <body>
 
-    <h1>Active Delivery Requests</h1>
-    
-    <form onsubmit="displayOrderDetails(event)">
-        
-        <label for="date">Date:</label><br>
-        <label for="time">Time:</label><br>
-        <label for="pickupLocation">Pickup Location:</label><br>
-        <label for="dropLocation">Drop Location:</label><br>
+    <h1>Available Requests for Delivery</h1>
 
-    </form>
+    {% if pending_requests %}
+        <ul>
+            {% for req in pending_requests %}
+                <li>
+                    <p>Requester: {{ req.requester.email }}</p>
+                    <p>Registration Number: {{ req.regno }}</p>
+                    <p>Date: {{ req.date }}</p>
+                    <p>Pickup Location: {{ req.pickup_location }}</p>
+                    <p>Drop Location: {{ req.drop_location }}</p>
+                    <p>Time: {{ req.time }}</p>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="request_id" value="{{ req.id }}">
+                        <button type="submit">Accept Delivery</button>
+                    </form>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No requests available for delivery at the moment.</p>
+    {% endif %}
 
+    <h2>Your Accepted Deliveries</h2>
+
+    {% if accepted_requests %}
+        <ul>
+            {% for req in accepted_requests %}
+                <li>
+                    <p>Requester: {{ req.requester.email }}</p>
+                    <p>Registration Number: {{ req.regno }}</p>
+                    <p>Date: {{ req.date }}</p>
+                    <p>Pickup Location: {{ req.pickup_location }}</p>
+                    <p>Drop Location: {{ req.drop_location }}</p>
+                    <p>Time: {{ req.time }}</p>
+                    <p>OTP: {{ req.otp }}</p> <!-- Show OTP for accepted requests -->
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You haven't accepted any deliveries yet.</p>
+    {% endif %}
 
 </body>
 </html>

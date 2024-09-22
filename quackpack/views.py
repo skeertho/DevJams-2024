@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from quackpack import models
-from .models import CustomUser, students, wardens
+from .models import CustomUser, students, wardens, req
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 
@@ -176,3 +176,44 @@ def request_page(request):
 
 def deliver_page(request):
     return render(request,'deliver_page.html')
+
+def create_request(request):
+    student = students.objects.get(regno=request.user)  
+    if request.method == "POST":
+        date = request.POST['date']
+        pickup_location = request.POST['pickup_location']
+        drop_location = request.POST['drop_location']
+        time = request.POST['time']
+
+        # Create the request
+        req_obj = req.objects.create(
+            requester=request.user,
+            regno=student.regno,
+            date=date,
+            pickup_location=pickup_location,
+            drop_location=drop_location,
+            time=time
+        )
+        req_obj.save()
+
+        return redirect('deliver_page')
+
+    return render(request, 'request_page.html', {'regno': student.regno})
+
+def deliver(request):
+    available_requests = req.objects.filter(status="Pending").exclude(requester=request.user)
+    accepted_requests = req.objects.filter(status="Accepted", accepted_by=request.user)
+    
+    if request.method == "POST":
+        request_id = request.POST['request_id']
+        req_obj = req.objects.get(id=request_id)
+        req_obj.accepted_by = request.user
+        req_obj.status = "Accepted"
+        req_obj.save()
+
+        return redirect('deliver')
+
+    return render(request, 'deliver_page.html', {
+        'pending_requests': available_requests,
+        'accepted_requests': accepted_requests,
+    })

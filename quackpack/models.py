@@ -29,7 +29,8 @@ class CustomUser(AbstractUser):
         db_table = "customuser"
 
 class students(models.Model):
-    regno = models.AutoField(primary_key=True)
+    #regno = models.AutoField(primary_key=True)
+    regno = models.CharField(max_length=20, primary_key=True)
     name = models.CharField(max_length=50)
     email = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     gender = models.CharField(max_length=1)
@@ -62,3 +63,17 @@ class wardens(models.Model):
     class Meta:
         db_table = "wardens"
 
+class req(models.Model):
+    requester = models.ForeignKey(CustomUser, related_name="requests", on_delete=models.CASCADE)
+    regno = models.CharField(max_length=15)
+    date = models.DateField()
+    time = models.TimeField()
+    otp = models.CharField(max_length=6, blank=True)
+    pickup_location = models.CharField(max_length=255)
+    drop_location = models.CharField(max_length=255)
+    status = models.CharField(max_length=20, default="Pending")  # Status can be "Pending", "Accepted", "Completed"
+    created_at = models.DateTimeField(auto_now_add=True)
+    accepted_by = models.ForeignKey(CustomUser, related_name="deliveries", null=True, blank=True, on_delete=models.SET_NULL)
+
+    def __str__(self):
+        return f"Request by {self.requester.email} on {self.date}"
